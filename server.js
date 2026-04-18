@@ -28,6 +28,20 @@ app.prepare().then(() => {
       socket.join(eventId);
       socket.eventId = eventId;
       console.log(`[Room] ${socket.id} joined event ${eventId}`);
+
+      // SYNC: Push all existing active users in this event to the newly joined client
+      if (eventUsers[eventId]) {
+        for (const [userId, userData] of Object.entries(eventUsers[eventId])) {
+          socket.emit('location-updated', {
+            eventId,
+            userId,
+            lat: userData.lat,
+            lng: userData.lng,
+            name: userData.name,
+            seat: userData.seat
+          });
+        }
+      }
     });
 
     // Handle real-time location updates

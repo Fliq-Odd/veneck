@@ -3,10 +3,22 @@ import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-export default function LeafletUI({ activeUsers }: { activeUsers: Record<string, any> }) {
+export default function LeafletUI({ 
+  activeUsers, 
+  geofenceCenter = [18.9389, 72.8258], 
+  geofenceRadiusKm = 0.5,
+  userCount = 0
+}: { 
+  activeUsers: Record<string, any>,
+  geofenceCenter?: [number, number],
+  geofenceRadiusKm?: number,
+  userCount?: number
+}) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
   const markersRef = useRef<Record<string, L.Marker>>({});
+  const geofenceOverlayRef = useRef<L.Circle | null>(null);
+  const centerTextRef = useRef<L.Marker | null>(null);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -14,12 +26,12 @@ export default function LeafletUI({ activeUsers }: { activeUsers: Record<string,
 
     // Initialize Leaflet Map
     const map = L.map(mapContainer.current, {
-      center: [18.9389, 72.8258], // Wankhede stadium, Mumbai
+      center: geofenceCenter,
       zoom: 16,
       zoomControl: false // Disable default zoom for a cleaner UI
     });
 
-    // Use CARTO's Dark Matter tile layer for that cyberpunk aesthetic! No API keys required.
+    // Use CARTO's Dark Matter tile layer for that cyberpunk aesthetic!
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
       subdomains: 'abcd',
@@ -34,13 +46,52 @@ export default function LeafletUI({ activeUsers }: { activeUsers: Record<string,
     };
   }, []);
 
+  // Render Center Label
+  useEffect(() => {
+    if (!mapInstance.current) return;
+    const map = mapInstance.current;
+
+    if (centerTextRef.current) {
+      map.removeLayer(centerTextRef.current);
+    }
+    const centerIcon = L.divIcon({
+      className: 'custom-center-text',
+      html: `<div class="flex items-center justify-center font-black text-4xl text-white/50" style="text-shadow: 0 0 20px rgba(16,185,129,0.5);">${userCount}</div>`,
+      iconSize: [60, 60],
+      iconAnchor: [30, 30]
+    });
+    centerTextRef.current = L.marker(geofenceCenter, { icon: centerIcon, interactive: false }).addTo(map);
+  }, [geofenceCenter, userCount]);
+
+  // Update Geofence overlays if Center or Radius changes
+  useEffect(() => {
+    if (!mapInstance.current) return;
+    const map = mapInstance.current;
+
+    map.setView(geofenceCenter, 15);
+
+    // Render Circle
+    if (geofenceOverlayRef.current) {
+      map.removeLayer(geofenceOverlayRef.current);
+    }
+    geofenceOverlayRef.current = L.circle(geofenceCenter, {
+      radius: geofenceRadiusKm * 1000, 
+      color: '#10b981',
+      weight: 1,
+      fillColor: '#10b981',
+      fillOpacity: 0.05,
+      dashArray: '5, 10'
+    }).addTo(map);
+
+  }, [geofenceCenter, geofenceRadiusKm]);
+
   useEffect(() => {
     if (!mapInstance.current) return;
     const map = mapInstance.current;
 
     Object.values(activeUsers).forEach((user: any) => {
       if (!markersRef.current[user.userId]) {
-        // Create custom HTML icon mimicking the green glowing dot from the previous Mapbox implementation
+        // Create custom HTML icon mimicking the green glowing dot
         const customIcon = L.divIcon({
           className: 'custom-leaflet-marker',
           html: '<div class="w-4 h-4 bg-emerald-500 rounded-full border-2 border-white shadow-[0_0_10px_#10b981]"></div>',
@@ -55,7 +106,7 @@ export default function LeafletUI({ activeUsers }: { activeUsers: Record<string,
       }
     });
 
-    // Optionally cleanup disconnected users here by checking the current activeUsers against markersRef
+    // Cleanup disconnected users
     const activeIds = Object.keys(activeUsers);
     Object.keys(markersRef.current).forEach(id => {
       if (!activeIds.includes(id)) {

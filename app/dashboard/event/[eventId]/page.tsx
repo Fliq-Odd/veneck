@@ -26,7 +26,10 @@ import {
   Check,
   Clock,
   AlertTriangle,
+  LocateFixed,
+  MapPin,
 } from "lucide-react";
+import { supabase } from "@/lib/supabaseClient";
 
 const LeafletUI = dynamic(() => import("@/components/LeafletUI"), {
   ssr: false,
@@ -50,6 +53,28 @@ export default function LiveEventMonitor() {
   const [copied, setCopied] = useState(false);
   const [startTime] = useState(Date.now());
   const [elapsed, setElapsed] = useState("00:00:00");
+
+  const [geofenceCenter, setGeofenceCenter] = useState<[number, number]>([18.9389, 72.8258]);
+  const [geofenceRadiusKm, setGeofenceRadiusKm] = useState(0.5);
+  const [loadingConfig, setLoadingConfig] = useState(true);
+
+  // ─── Fetch Event Details ───────────────────────
+  useEffect(() => {
+    (async () => {
+      if (supabase) {
+        const { data } = await supabase
+          .from("events")
+          .select("lat, lng, radius_km")
+          .eq("id", eventId)
+          .single();
+        if (data && typeof data.lat === 'number' && typeof data.lng === 'number') {
+          setGeofenceCenter([data.lat, data.lng]);
+          setGeofenceRadiusKm(data.radius_km || 0.5);
+        }
+      }
+      setLoadingConfig(false);
+    })();
+  }, [eventId]);
 
   // ─── Socket Connection ───────────────────────
   useEffect(() => {
@@ -100,10 +125,13 @@ export default function LiveEventMonitor() {
     return () => clearInterval(iv);
   }, [startTime]);
 
-  const joinUrl =
-    typeof window !== "undefined"
-      ? `${window.location.origin}/join/${eventId}`
-      : "";
+  const [joinUrl, setJoinUrl] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setJoinUrl(`${window.location.origin}/join/${eventId}`);
+    }
+  }, [eventId]);
 
   const copyLink = () => {
     navigator.clipboard.writeText(joinUrl);
@@ -117,7 +145,14 @@ export default function LiveEventMonitor() {
     <div className="h-screen w-full bg-background text-foreground overflow-hidden relative font-sans">
       {/* ─── Full Background Map ─── */}
       <div className="absolute inset-0 z-0">
-        <LeafletUI activeUsers={activeUsers} />
+        {!loadingConfig && (
+          <LeafletUI 
+            activeUsers={activeUsers} 
+            geofenceCenter={geofenceCenter}
+            geofenceRadiusKm={geofenceRadiusKm}
+            userCount={userCount}
+          />
+        )}
       </div>
 
       {/* ─── Floating Overlays ─── */}
@@ -256,6 +291,43 @@ export default function LiveEventMonitor() {
                         <p className="text-[10px] text-muted-foreground font-mono">
                           ({alert.lat.toFixed(5)}, {alert.lng.toFixed(5)})
                         </p>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Live Attendee Roster */}
+            <Card className="backdrop-blur-xl bg-background/70 border-border/50 flex-1 overflow-hidden flex flex-col max-h-[300px]">
+              <CardHeader className="p-3 border-b border-border">
+                <CardTitle className="text-xs uppercase tracking-wider text-muted-foreground flex items-center justify-between">
+                  <span className="flex items-center gap-2">
+                    <LocateFixed className="w-4 h-4 text-emerald-500" /> Live Roster
+                  </span>
+                  <span className="text-[10px] bg-background px-2 py-0.5 rounded-full border border-border">GPS Authorized</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 overflow-y-auto flex-1">
+                <div className="p-2 space-y-1">
+                  {Object.values(activeUsers).length === 0 ? (
+                    <p className="text-[10px] text-center text-muted-foreground py-6 font-mono">
+                      Awaiting connection pulses...
+                    </p>
+                  ) : (
+                    Object.values(activeUsers).map((u: any) => (
+                      <div key={u.userId} className="flex flex-col p-2 hover:bg-white/5 rounded-md border border-transparent hover:border-border transition-colors">
+                        <div className="flex items-center justify-between pointer-events-auto">
+                          <span className="text-xs font-bold text-foreground dark:text-white truncate pr-2 flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_5px_#10b981]" />
+                            {u.userId.split('_')[1] ? `Attendee_${u.userId.split('_')[1]}` : u.userId}
+                          </span>
+                          <span className="text-[9px] text-emerald-400 font-mono tracking-widest bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30">ONLINE</span>
+                        </div>
+                        <div className="flex items-center gap-1 mt-1 text-[9px] text-muted-foreground font-mono">
+                          <MapPin className="w-2.5 h-2.5" />
+                          <span>{u.lat?.toFixed(5)}, {u.lng?.toFixed(5)}</span>
+                        </div>
                       </div>
                     ))
                   )}

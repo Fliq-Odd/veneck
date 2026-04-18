@@ -40,6 +40,7 @@ import {
   ArrowRight,
   Settings,
   Radius,
+  Trash2,
 } from "lucide-react";
 
 const PRESET_STADIUMS = [
@@ -152,6 +153,19 @@ export default function DashboardPage() {
     setNewEventName("");
     setNewEventVenue("");
     setNewEventDate("");
+  };
+
+  // ─── Delete Event ───────────────────────────
+  const handleDeleteEvent = async (id: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (confirm("Are you sure you want to completely delete this event? This action cannot be reversed.")) {
+      setEvents(events.filter(event => event.id !== id));
+      if (supabase) {
+        await supabase.from("events").delete().eq("id", id);
+      }
+    }
   };
 
   // ─── Sign Out ───────────────────────────────
@@ -399,6 +413,15 @@ export default function DashboardPage() {
                           <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                         </Button>
                       </Link>
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        className="h-9 px-3"
+                        onClick={(e) => handleDeleteEvent(event.id, e)}
+                        title="Delete Event"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>

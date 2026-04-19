@@ -189,7 +189,7 @@ export default function DashboardPage() {
   const statusColor = (s: string) => {
     switch (s) {
       case "live":
-        return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
+        return "bg-primary/20 text-primary border-primary/30";
       case "ended":
         return "bg-slate-500/20 text-muted-foreground border-slate-500/30";
       default:
@@ -201,7 +201,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-border border-t-emerald-500 rounded-full animate-spin" />
+          <div className="w-12 h-12 border-4 border-border border-t-primary rounded-full animate-spin text-foreground" />
           <p className="text-foreground0 font-mono text-sm uppercase tracking-widest">
             Loading Dashboard...
           </p>
@@ -213,18 +213,18 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* ─── Top Nav ─── */}
-      <header className="border-b border-border backdrop-blur-md bg-background/80 sticky top-0 z-30">
+      <header className="border-b border-border backdrop-blur-md bg-background/80 sticky top-0 z-30 text-foreground">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-2">
             {profile?.logo_url ? (
-              <img src={profile.logo_url} alt="Logo" className="h-9 w-9 rounded-lg object-cover border border-emerald-500/40" />
+              <img src={profile.logo_url} alt="Logo" className="h-9 w-9 rounded-lg object-cover border border-primary/40" />
             ) : (
-              <div className="h-9 w-9 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center">
-                <Zap className="w-5 h-5 text-emerald-400" />
+              <div className="h-9 w-9 rounded-lg bg-primary/20 border border-primary/40 flex items-center justify-center text-primary-foreground">
+                <Zap className="w-5 h-5 text-primary" />
               </div>
             )}
             <span className="text-lg font-black tracking-tight hidden sm:inline">
-              {profile?.org_name || (<>Venue<span className="text-emerald-500">Sync</span></>)}
+              {profile?.org_name || (<>Venue<span className="text-primary">Sync</span></>)}
             </span>
           </Link>
 
@@ -236,7 +236,7 @@ export default function DashboardPage() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-muted-foreground hover:text-foreground dark:text-white hover:bg-white/5 h-9 w-9 p-0"
+                className="text-muted-foreground hover:text-foreground hover:bg-white/5 h-9 w-9 p-0"
               >
                 <Settings className="w-4 h-4" />
               </Button>
@@ -245,7 +245,7 @@ export default function DashboardPage() {
               variant="ghost"
               size="sm"
               onClick={handleSignOut}
-              className="text-muted-foreground hover:text-foreground dark:text-white hover:bg-white/5 gap-2"
+              className="text-muted-foreground hover:text-foreground hover:bg-white/5 gap-2"
             >
               <LogOut className="w-4 h-4" />
               <span className="hidden sm:inline">Sign out</span>
@@ -259,7 +259,7 @@ export default function DashboardPage() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
           <div>
             <h1 className="text-3xl font-black tracking-tight mb-1">
-              Command <span className="text-emerald-500">Center</span>
+              Command <span className="text-primary">Center</span>
             </h1>
             <p className="text-muted-foreground text-sm">
               Deploy, monitor, and analyze your events.
@@ -270,7 +270,7 @@ export default function DashboardPage() {
               setCreatedEvent(null);
               setShowCreateDialog(true);
             }}
-            className="bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-white font-bold px-6 h-12 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all flex items-center gap-2"
+            className="bg-primary hover:bg-primary font-bold px-6 h-12 rounded-xl shadow-lg shadow-primary/20 hover:shadow-lg shadow-primary/20 transition-all flex items-center gap-2 text-primary-foreground"
           >
             <Plus className="w-5 h-5" />
             Create New Event
@@ -279,26 +279,26 @@ export default function DashboardPage() {
 
         {/* ─── Stats Row ─── */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-          <Card className="bg-card/50 border-border">
+          <Card className="bg-card/50 border-border text-foreground">
             <CardContent className="p-5 flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                <BarChart3 className="w-6 h-6 text-emerald-400" />
+              <div className="h-12 w-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary-foreground">
+                <BarChart3 className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="text-2xl font-black text-foreground dark:text-white">{events.length}</p>
+                <p className="text-2xl font-black text-foreground">{events.length}</p>
                 <p className="text-xs text-muted-foreground uppercase tracking-wider">
                   Total Events
                 </p>
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-card/50 border-border">
+          <Card className="bg-card/50 border-border text-foreground">
             <CardContent className="p-5 flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                <Radio className="w-6 h-6 text-emerald-400 animate-pulse" />
+              <div className="h-12 w-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary-foreground">
+                <Radio className="w-6 h-6 text-primary animate-pulse" />
               </div>
               <div>
-                <p className="text-2xl font-black text-foreground dark:text-white">
+                <p className="text-2xl font-black text-foreground">
                   {events.filter((e) => e.status === "live").length}
                 </p>
                 <p className="text-xs text-muted-foreground uppercase tracking-wider">
@@ -307,13 +307,13 @@ export default function DashboardPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-card/50 border-border">
+          <Card className="bg-card/50 border-border text-foreground">
             <CardContent className="p-5 flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                <Users className="w-6 h-6 text-emerald-400" />
+              <div className="h-12 w-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary-foreground">
+                <Users className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="text-2xl font-black text-foreground dark:text-white">
+                <p className="text-2xl font-black text-foreground">
                   {events.reduce((sum, e) => sum + (e.attendee_count || 0), 0)}
                 </p>
                 <p className="text-xs text-muted-foreground uppercase tracking-wider">
@@ -327,14 +327,14 @@ export default function DashboardPage() {
         {/* ─── Events List ─── */}
         <div>
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-emerald-500" />
+            <Calendar className="w-5 h-5 text-primary" />
             Your Events
           </h2>
 
           {events.length === 0 ? (
-            <Card className="bg-card/30 border-dashed border-border text-center">
+            <Card className="bg-card/30 border-dashed border-border text-center text-foreground">
               <CardContent className="py-16 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 rounded-full bg-card flex items-center justify-center mx-auto">
                   <MapPin className="w-8 h-8 text-muted-foreground/80" />
                 </div>
                 <h3 className="text-lg font-bold text-muted-foreground">
@@ -346,7 +346,7 @@ export default function DashboardPage() {
                 </p>
                 <Button
                   onClick={() => setShowCreateDialog(true)}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-white font-bold px-6 mt-2"
+                  className="bg-primary hover:bg-primary font-bold px-6 mt-2 text-primary-foreground"
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   Create First Event
@@ -358,12 +358,12 @@ export default function DashboardPage() {
               {events.map((event) => (
                 <Card
                   key={event.id}
-                  className="bg-card/50 border-border hover:border-emerald-500/20 transition-all duration-300 group"
+                  className="bg-card/50 border-border hover:border-primary/20 transition-all duration-300 group text-foreground"
                 >
                   <CardContent className="p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-bold text-foreground dark:text-white truncate">
+                        <h3 className="text-lg font-bold text-foreground truncate">
                           {event.name}
                         </h3>
                         <Badge
@@ -393,7 +393,7 @@ export default function DashboardPage() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-slate-700 text-muted-foreground dark:text-slate-300 hover:bg-white/5 gap-1"
+                        className="border-border text-muted-foreground hover:bg-white/5 gap-1 text-foreground"
                         onClick={() => copyLink(event.id)}
                       >
                         {copied ? (
@@ -406,7 +406,7 @@ export default function DashboardPage() {
                       <Link href={`/dashboard/event/${event.id}`}>
                         <Button
                           size="sm"
-                          className="bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-white font-semibold gap-1 group"
+                          className="bg-primary hover:bg-primary font-semibold gap-1 group text-primary-foreground"
                         >
                           <Eye className="w-3 h-3" />
                           Monitor
@@ -433,10 +433,10 @@ export default function DashboardPage() {
 
       {/* ─── Create Event Dialog ─── */}
       <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
-        <DialogContent className="bg-slate-900 border-border/50 text-foreground max-w-md">
+        <DialogContent className="bg-card border-border/50 max-w-md text-foreground">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold flex items-center gap-2">
-              <Plus className="w-5 h-5 text-emerald-500" />
+              <Plus className="w-5 h-5 text-primary" />
               {createdEvent ? "Event Created!" : "Deploy New Event"}
             </DialogTitle>
             <DialogDescription className="text-muted-foreground">
@@ -458,7 +458,7 @@ export default function DashboardPage() {
                 <div className="flex items-center gap-2">
                   <Badge
                     variant="outline"
-                    className="border-emerald-500/30 bg-emerald-500/10 text-emerald-400 flex-1 justify-center py-2 font-mono text-[10px] truncate rounded-md"
+                    className="border-primary/30 bg-primary/10 text-primary flex-1 justify-center py-2 font-mono text-[10px] truncate rounded-md text-primary-foreground"
                   >
                     {joinUrl(createdEvent.id)}
                   </Badge>
@@ -466,10 +466,10 @@ export default function DashboardPage() {
                     variant="ghost"
                     size="sm"
                     onClick={() => copyLink(createdEvent.id)}
-                    className="text-muted-foreground hover:text-foreground dark:text-white shrink-0"
+                    className="text-muted-foreground hover:text-foreground shrink-0"
                   >
                     {copied ? (
-                      <Check className="w-4 h-4 text-emerald-400" />
+                      <Check className="w-4 h-4 text-primary" />
                     ) : (
                       <Copy className="w-4 h-4" />
                     )}
@@ -479,7 +479,7 @@ export default function DashboardPage() {
               <div className="flex gap-2">
                 <Button
                   variant="outline"
-                  className="flex-1 border-slate-700"
+                  className="flex-1 border-border text-foreground"
                   onClick={() => setShowCreateDialog(false)}
                 >
                   Close
@@ -488,7 +488,7 @@ export default function DashboardPage() {
                   href={`/dashboard/event/${createdEvent.id}`}
                   className="flex-1"
                 >
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-white font-bold">
+                  <Button className="w-full bg-primary hover:bg-primary font-bold text-primary-foreground">
                     Open Live Monitor
                   </Button>
                 </Link>
@@ -504,7 +504,7 @@ export default function DashboardPage() {
                   value={newEventName}
                   onChange={(e) => setNewEventName(e.target.value)}
                   placeholder="e.g., IPL Final 2026"
-                  className="bg-background/50 border-border text-foreground dark:text-white h-12 focus:border-emerald-500/50 placeholder:text-muted-foreground/80"
+                  className="bg-background/50 border-border h-12 focus:border-primary/50 placeholder:text-muted-foreground/80 text-foreground"
                   required
                 />
               </div>
@@ -517,7 +517,7 @@ export default function DashboardPage() {
                     onClick={() => setVenueMode("preset")}
                     className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md border transition-all ${
                       venueMode === "preset"
-                        ? "bg-emerald-500/10 border-emerald-500/50 text-emerald-400"
+                        ? "bg-primary/10 border-primary/50 text-primary"
                         : "bg-background/20 border-border text-muted-foreground hover:bg-background/50"
                     }`}
                   >
@@ -528,7 +528,7 @@ export default function DashboardPage() {
                     onClick={() => setVenueMode("custom")}
                     className={`flex-1 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md border transition-all ${
                       venueMode === "custom"
-                        ? "bg-emerald-500/10 border-emerald-500/50 text-emerald-400"
+                        ? "bg-primary/10 border-primary/50 text-primary"
                         : "bg-background/20 border-border text-muted-foreground hover:bg-background/50"
                     }`}
                   >
@@ -549,7 +549,7 @@ export default function DashboardPage() {
                           onClick={() => setSelectedPreset(stadium.id)}
                           className={`flex justify-between items-center px-4 py-2 rounded-xl border text-sm text-left transition-all ${
                             selectedPreset === stadium.id
-                              ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-400 font-semibold shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                              ? "bg-primary/10 border-primary/40 text-primary font-semibold shadow-lg shadow-primary/20"
                               : "bg-background/30 border-border text-muted-foreground hover:border-slate-500"
                           }`}
                         >
@@ -564,7 +564,7 @@ export default function DashboardPage() {
                 )}
 
                 {venueMode === "custom" && (
-                  <div className="space-y-4 bg-background/30 p-3 rounded-xl border border-border">
+                  <div className="space-y-4 bg-background/30 p-3 rounded-xl border border-border text-foreground">
                     <div className="space-y-2">
                       <Label className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">
                         Ground Name
@@ -573,7 +573,7 @@ export default function DashboardPage() {
                         value={newEventVenue}
                         onChange={(e) => setNewEventVenue(e.target.value)}
                         placeholder="e.g., Tech Park Sector 5"
-                        className="bg-background/50 border-border text-foreground dark:text-white h-10 focus:border-emerald-500/50 text-sm placeholder:text-muted-foreground/80"
+                        className="bg-background/50 border-border h-10 focus:border-primary/50 text-sm placeholder:text-muted-foreground/80 text-foreground"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
@@ -584,7 +584,7 @@ export default function DashboardPage() {
                           value={customLat}
                           onChange={(e) => setCustomLat(e.target.value)}
                           placeholder="e.g. 18.9389"
-                          className="bg-background/50 border-border text-foreground dark:text-white h-10 focus:border-emerald-500/50 text-sm font-mono"
+                          className="bg-background/50 border-border h-10 focus:border-primary/50 text-sm font-mono text-foreground"
                         />
                       </div>
                       <div className="space-y-1">
@@ -594,7 +594,7 @@ export default function DashboardPage() {
                           value={customLng}
                           onChange={(e) => setCustomLng(e.target.value)}
                           placeholder="e.g. 72.8258"
-                          className="bg-background/50 border-border text-foreground dark:text-white h-10 focus:border-emerald-500/50 text-sm font-mono"
+                          className="bg-background/50 border-border h-10 focus:border-primary/50 text-sm font-mono text-foreground"
                         />
                       </div>
                     </div>
@@ -607,7 +607,7 @@ export default function DashboardPage() {
                         value={customRadius}
                         onChange={(e) => setCustomRadius(e.target.value)}
                         placeholder="e.g. 0.5 for 500m"
-                        className="bg-background/50 border-border text-foreground dark:text-white h-10 focus:border-emerald-500/50 text-sm"
+                        className="bg-background/50 border-border h-10 focus:border-primary/50 text-sm text-foreground"
                         min="0.1"
                         step="0.1"
                       />
@@ -624,13 +624,13 @@ export default function DashboardPage() {
                   type="date"
                   value={newEventDate}
                   onChange={(e) => setNewEventDate(e.target.value)}
-                  className="bg-background/50 border-border text-foreground dark:text-white h-12 focus:border-emerald-500/50"
+                  className="bg-background/50 border-border h-12 focus:border-primary/50 text-foreground"
                 />
               </div>
               <Button
                 onClick={handleCreateEvent}
                 disabled={creating || !newEventName}
-                className="w-full h-13 bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-white font-bold rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all"
+                className="w-full h-13 bg-primary hover:bg-primary font-bold rounded-xl shadow-lg shadow-primary/20 transition-all text-primary-foreground"
               >
                 {creating ? (
                   <span className="flex items-center gap-2">

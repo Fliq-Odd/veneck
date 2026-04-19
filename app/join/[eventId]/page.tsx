@@ -44,27 +44,27 @@ export default function JoinEvent() {
       
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-emerald-600/20 blur-[120px] rounded-full"></div>
-         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-emerald-900/40 blur-[100px] rounded-full"></div>
+         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/20 blur-[120px] rounded-full text-primary-foreground"></div>
+         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/40 blur-[100px] rounded-full"></div>
       </div>
 
       <div className="w-full max-w-md z-10 space-y-8 animate-in fade-in zoom-in-95 duration-700 ease-out">
          
          <div className="flex flex-col items-center text-center space-y-4">
-            <div className="w-20 h-20 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.2)] mb-2 relative">
-               <div className="absolute inset-0 rounded-2xl bg-emerald-400/5 blur-md"></div>
-               <ScanFace className="w-10 h-10 text-emerald-400 relative z-10" />
+            <div className="w-20 h-20 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center shadow-lg shadow-primary/20 mb-2 relative text-primary-foreground">
+               <div className="absolute inset-0 rounded-2xl bg-primary/5 blur-md text-primary-foreground"></div>
+               <ScanFace className="w-10 h-10 text-primary relative z-10" />
             </div>
-            <h1 className="text-4xl font-black tracking-tight text-foreground dark:text-white">VeNeck <span className="text-emerald-500">Pass</span></h1>
+            <h1 className="text-4xl font-black tracking-tight text-foreground">VeNeck <span className="text-primary">Pass</span></h1>
             <p className="text-muted-foreground font-medium text-sm">Outer Perimeter Security Check</p>
          </div>
 
-        <Card className="backdrop-blur-2xl bg-card/60 border border-border/50 text-foreground shadow-2xl overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-50"></div>
+        <Card className="backdrop-blur-2xl bg-card/60 border border-border/50 shadow-2xl overflow-hidden relative text-foreground">
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
           
           <CardHeader className="pt-8 pb-4">
             <CardTitle className="flex items-center gap-2 text-xl">
-               <Fingerprint className="w-5 h-5 text-emerald-500" />
+               <Fingerprint className="w-5 h-5 text-primary" />
                Entity Authorization
             </CardTitle>
             <CardDescription className="text-muted-foreground text-sm">Provide credentials to initialize your secure tracking socket.</CardDescription>
@@ -78,7 +78,7 @@ export default function JoinEvent() {
                   value={name} 
                   onChange={(e) => setName(e.target.value)} 
                   placeholder="John Doe"
-                  className="bg-background/50 border-border text-foreground dark:text-white placeholder:text-slate-700 h-12 px-4 focus:border-emerald-500/50 transition-colors"
+                  className="bg-background/50 border-border placeholder:text-slate-700 h-12 px-4 focus:border-primary/50 transition-colors text-foreground"
                   required
                 />
               </div>
@@ -89,7 +89,7 @@ export default function JoinEvent() {
                   value={seatNumber} 
                   onChange={(e) => setSeatNumber(e.target.value)} 
                   placeholder="e.g., Gate A - Seat 42"
-                  className="bg-background/50 border-border text-foreground dark:text-white placeholder:text-slate-700 h-12 px-4 focus:border-emerald-500/50 transition-colors"
+                  className="bg-background/50 border-border placeholder:text-slate-700 h-12 px-4 focus:border-primary/50 transition-colors text-foreground"
                   required
                 />
               </div>
@@ -97,7 +97,7 @@ export default function JoinEvent() {
               <div className="pt-4">
                  <Button 
                    type="submit" 
-                   className="w-full h-14 bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-white font-bold text-lg rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all flex items-center justify-center gap-2 group" 
+                   className="w-full h-14 bg-primary hover:bg-primary font-bold text-lg rounded-xl shadow-lg shadow-primary/20 hover:shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group text-primary-foreground" 
                    disabled={loading}
                  >
                    {loading ? (

@@ -35,7 +35,7 @@ const LeafletUI = dynamic(() => import("@/components/LeafletUI"), {
   ssr: false,
   loading: () => (
     <div className="absolute inset-0 flex flex-col items-center justify-center bg-background text-foreground0">
-      <div className="w-16 h-16 mb-4 rounded-full border-4 border-border border-t-emerald-500 animate-spin" />
+      <div className="w-16 h-16 mb-4 rounded-full border-4 border-border border-t-primary animate-spin text-foreground" />
       <p className="font-mono tracking-widest text-sm uppercase">
         Initializing Geospatial Engine...
       </p>
@@ -162,35 +162,35 @@ export default function LiveEventMonitor() {
           {/* Left: Header + QR */}
           <div className="w-[360px] space-y-4 pointer-events-auto">
             {/* Nav Header */}
-            <div className="flex items-center gap-3 backdrop-blur-xl bg-background/70 p-3 rounded-2xl border border-border shadow-2xl">
+            <div className="flex items-center gap-3 backdrop-blur-xl bg-background/70 p-3 rounded-2xl border border-border shadow-2xl text-foreground">
               <Link href="/dashboard">
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-muted-foreground hover:text-foreground dark:text-white h-9 w-9 p-0"
+                  className="text-muted-foreground hover:text-foreground h-9 w-9 p-0"
                 >
                   <ArrowLeft className="w-5 h-5" />
                 </Button>
               </Link>
-              <div className="h-10 w-10 rounded-xl bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50">
-                <MonitorPlay className="w-5 h-5 text-emerald-400" />
+              <div className="h-10 w-10 rounded-xl bg-primary/20 flex items-center justify-center border border-primary/50 text-primary-foreground">
+                <MonitorPlay className="w-5 h-5 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
-                <h1 className="text-lg font-black tracking-tight text-foreground dark:text-white leading-tight truncate">
-                  Live <span className="text-emerald-500">Monitor</span>
+                <h1 className="text-lg font-black tracking-tight text-foreground leading-tight truncate">
+                  Live <span className="text-primary">Monitor</span>
                 </h1>
                 <p className="text-[10px] text-muted-foreground font-mono uppercase tracking-wider truncate">
                   {eventId}
                 </p>
               </div>
-              <Badge className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 font-bold text-xs animate-pulse shrink-0">
+              <Badge className="bg-primary/20 text-primary border border-primary/50 font-bold text-xs animate-pulse shrink-0 text-primary-foreground">
                 <Radio className="w-3 h-3 mr-1" />
                 LIVE
               </Badge>
             </div>
 
             {/* QR Card */}
-            <Card className="backdrop-blur-xl bg-background/70 border-border/50 shadow-2xl overflow-hidden">
+            <Card className="backdrop-blur-xl bg-background/70 border-border/50 shadow-2xl overflow-hidden text-foreground">
               <CardContent className="p-4 flex items-center gap-4">
                 <div className="bg-white p-2 rounded-lg shrink-0">
                   <QRCodeSVG value={joinUrl} size={80} />
@@ -199,17 +199,17 @@ export default function LiveEventMonitor() {
                   <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">
                     Entry QR Code
                   </p>
-                  <p className="text-[9px] text-emerald-400 font-mono truncate">
+                  <p className="text-[9px] text-primary font-mono truncate">
                     {joinUrl}
                   </p>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={copyLink}
-                    className="h-7 text-[10px] border-slate-700 text-muted-foreground dark:text-slate-300 hover:bg-white/5 gap-1"
+                    className="h-7 text-[10px] border-border text-muted-foreground hover:bg-white/5 gap-1 text-foreground"
                   >
                     {copied ? (
-                      <Check className="w-3 h-3 text-emerald-400" />
+                      <Check className="w-3 h-3 text-primary" />
                     ) : (
                       <Copy className="w-3 h-3" />
                     )}
@@ -223,24 +223,24 @@ export default function LiveEventMonitor() {
           {/* Right: Metrics */}
           <div className="w-[300px] space-y-3 pointer-events-auto">
             {/* Live Count */}
-            <Card className="backdrop-blur-xl bg-background/80 border-emerald-500/20 shadow-[0_0_40px_rgba(16,185,129,0.08)] relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-600 to-teal-400" />
+            <Card className="backdrop-blur-xl bg-background/80 border-primary/20 shadow-lg shadow-primary/20 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-muted-foreground" />
               <CardContent className="p-5 flex items-center justify-between">
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest text-emerald-500 font-bold mb-1">
+                  <p className="text-[10px] uppercase tracking-widest text-primary font-bold mb-1">
                     Active Connections
                   </p>
-                  <p className="text-4xl font-black text-foreground dark:text-white">{userCount}</p>
+                  <p className="text-4xl font-black text-foreground">{userCount}</p>
                 </div>
-                <div className="h-14 w-14 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 relative">
-                  <div className="absolute inset-0 rounded-full border border-emerald-500/50 animate-ping opacity-20" />
-                  <Users className="w-7 h-7 text-emerald-400" />
+                <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20 relative text-primary-foreground">
+                  <div className="absolute inset-0 rounded-full border border-primary/50 animate-ping opacity-20" />
+                  <Users className="w-7 h-7 text-primary" />
                 </div>
               </CardContent>
             </Card>
 
             {/* Uptime */}
-            <Card className="backdrop-blur-xl bg-background/70 border-border/50">
+            <Card className="backdrop-blur-xl bg-background/70 border-border/50 text-foreground">
               <CardContent className="p-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-foreground0" />
@@ -248,15 +248,15 @@ export default function LiveEventMonitor() {
                     Session Time
                   </span>
                 </div>
-                <span className="text-sm font-mono text-emerald-400 font-bold">
+                <span className="text-sm font-mono text-primary font-bold">
                   {elapsed}
                 </span>
               </CardContent>
             </Card>
 
             {/* Alerts */}
-            <Card className="backdrop-blur-xl bg-background/70 border-border/50">
-              <CardHeader className="p-3 border-b border-border">
+            <Card className="backdrop-blur-xl bg-background/70 border-border/50 text-foreground">
+              <CardHeader className="p-3 border-b border-border text-foreground">
                 <CardTitle className="text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-2">
                   <ShieldAlert className="w-4 h-4 text-rose-500" />
                   System Alerts
@@ -299,13 +299,13 @@ export default function LiveEventMonitor() {
             </Card>
 
             {/* Live Attendee Roster */}
-            <Card className="backdrop-blur-xl bg-background/70 border-border/50 flex-1 overflow-hidden flex flex-col max-h-[300px]">
-              <CardHeader className="p-3 border-b border-border">
+            <Card className="backdrop-blur-xl bg-background/70 border-border/50 flex-1 overflow-hidden flex flex-col max-h-[300px] text-foreground">
+              <CardHeader className="p-3 border-b border-border text-foreground">
                 <CardTitle className="text-xs uppercase tracking-wider text-muted-foreground flex items-center justify-between">
                   <span className="flex items-center gap-2">
-                    <LocateFixed className="w-4 h-4 text-emerald-500" /> Live Roster
+                    <LocateFixed className="w-4 h-4 text-primary" /> Live Roster
                   </span>
-                  <span className="text-[10px] bg-background px-2 py-0.5 rounded-full border border-border">GPS Authorized</span>
+                  <span className="text-[10px] bg-background px-2 py-0.5 rounded-full border border-border text-foreground">GPS Authorized</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-0 overflow-y-auto flex-1">
@@ -316,13 +316,13 @@ export default function LiveEventMonitor() {
                     </p>
                   ) : (
                     Object.values(activeUsers).map((u: any) => (
-                      <div key={u.userId} className="flex flex-col p-2 hover:bg-white/5 rounded-md border border-transparent hover:border-border transition-colors">
+                      <div key={u.userId} className="flex flex-col p-2 hover:bg-white/5 rounded-md border border-transparent hover:border-border transition-colors text-foreground">
                         <div className="flex items-center justify-between pointer-events-auto">
-                          <span className="text-xs font-bold text-foreground dark:text-white truncate pr-2 flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_5px_#10b981]" />
+                          <span className="text-xs font-bold text-foreground truncate pr-2 flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse shadow-lg shadow-primary/20 text-primary-foreground" />
                             {u.userId.split('_')[1] ? `Attendee_${u.userId.split('_')[1]}` : u.userId}
                           </span>
-                          <span className="text-[9px] text-emerald-400 font-mono tracking-widest bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30">ONLINE</span>
+                          <span className="text-[9px] text-primary font-mono tracking-widest bg-primary/10 px-1.5 py-0.5 rounded border border-primary/30 text-primary-foreground">ONLINE</span>
                         </div>
                         <div className="flex items-center gap-1 mt-1 text-[9px] text-muted-foreground font-mono">
                           <MapPin className="w-2.5 h-2.5" />
@@ -339,7 +339,7 @@ export default function LiveEventMonitor() {
 
         {/* ─── Bottom Bar (optional future use) ─── */}
         <div className="flex justify-center pointer-events-none">
-          <div className="backdrop-blur-md bg-background/50 border border-border rounded-full px-6 py-2">
+          <div className="backdrop-blur-md bg-background/50 border border-border rounded-full px-6 py-2 text-foreground">
             <p className="text-[10px] text-foreground0 font-mono tracking-widest uppercase">
               VeNeck • Real-Time Crowd Intelligence
             </p>

@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "VeNeck — Real-Time Crowd Intelligence",
+  title: "VeNeck",
   description: "Live crowd management system for large-scale sporting events. Track, monitor, and secure your venue in real time.",
 };
 

@@ -104,7 +104,7 @@ export default function LandingPage() {
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10">
           Deploy a QR code at the outer gate. Instantly track 50,000+ attendees
           on a live map. Identify chokepoints, deploy guards, and manage
-          emergencies — all from one dashboard.
+          emergencies all from one dashboard.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

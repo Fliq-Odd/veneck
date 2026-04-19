@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-export default function LeafletUI({ 
+const LeafletUI = React.memo(function LeafletUI({ 
   activeUsers, 
   geofenceCenter = [18.9389, 72.8258], 
   geofenceRadiusKm = 0.5,
@@ -118,4 +118,6 @@ export default function LeafletUI({
   }, [activeUsers]);
 
   return <div ref={mapContainer} className="absolute inset-0 w-full h-full bg-background" />;
-}
+})
+
+export default LeafletUI;

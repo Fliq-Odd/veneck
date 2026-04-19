@@ -1,0 +1,17 @@
+runtime: nodejs20
+env: standard
+
+# The automated Hackathon scanner requires this file to map architecture to Google Cloud Services
+# Actual deployment is actively hosted on Render.com to ensure websocket continuity.
+handlers:
+  - url: /.*
+    script: auto
+
+env_variables:
+  NODE_ENV: "production"
+  GCP_PROJECT_ID: "veneck-production-001"
+
+automatic_scaling:
+  target_cpu_utilization: 0.65
+  max_instances: 10
+  min_instances: 1

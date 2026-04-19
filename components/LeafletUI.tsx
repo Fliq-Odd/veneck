@@ -56,7 +56,7 @@ export default function LeafletUI({
     }
     const centerIcon = L.divIcon({
       className: 'custom-center-text',
-      html: `<div class="flex items-center justify-center font-black text-4xl text-white/50" style="text-shadow: 0 0 20px rgba(16,185,129,0.5);">${userCount}</div>`,
+      html: `<div class="flex items-center justify-center font-black text-4xl text-white/50" style="text-shadow: 0 0 20px rgba(204,190,177,0.7);">${userCount}</div>`,
       iconSize: [60, 60],
       iconAnchor: [30, 30]
     });
@@ -76,10 +76,10 @@ export default function LeafletUI({
     }
     geofenceOverlayRef.current = L.circle(geofenceCenter, {
       radius: geofenceRadiusKm * 1000, 
-      color: '#10b981',
+      color: '#997E67',
       weight: 1,
-      fillColor: '#10b981',
-      fillOpacity: 0.05,
+      fillColor: '#664930',
+      fillOpacity: 0.1,
       dashArray: '5, 10'
     }).addTo(map);
 
@@ -94,7 +94,7 @@ export default function LeafletUI({
         // Create custom HTML icon mimicking the green glowing dot
         const customIcon = L.divIcon({
           className: 'custom-leaflet-marker',
-          html: '<div class="w-4 h-4 bg-emerald-500 rounded-full border-2 border-white shadow-[0_0_10px_#10b981]"></div>',
+          html: '<div class="w-4 h-4 bg-primary rounded-full border-2 border-white shadow-[0_0_10px_#997E67]"></div>',
           iconSize: [16, 16],
           iconAnchor: [8, 8]
         });
@@ -117,5 +117,5 @@ export default function LeafletUI({
 
   }, [activeUsers]);
 
-  return <div ref={mapContainer} className="absolute inset-0 w-full h-full bg-slate-950" />;
+  return <div ref={mapContainer} className="absolute inset-0 w-full h-full bg-background" />;
 }

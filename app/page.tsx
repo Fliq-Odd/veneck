@@ -50,7 +50,7 @@ const features = [
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden relative">
+    <main role="main" aria-label="VeNeck Landing Interface" className="min-h-screen bg-background text-foreground font-sans overflow-hidden relative">
       {/* ─── Background Glow ─── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-20%] left-[20%] w-[600px] h-[600px] bg-primary/15 blur-[180px] rounded-full text-primary-foreground" />
@@ -68,7 +68,7 @@ export default function LandingPage() {
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/login">
+          <Link href="/login" aria-label="Navigate to Login Dashboard">
             <Button
               variant="ghost"
               className="text-muted-foreground  hover:text-foreground hover:bg-white/5"
@@ -76,7 +76,7 @@ export default function LandingPage() {
               Log In
             </Button>
           </Link>
-          <Link href="/signup">
+          <Link href="/signup" aria-label="Create New VeNeck Account">
             <Button className="bg-primary hover:bg-primary font-semibold px-5 shadow-lg shadow-primary/20 hover:shadow-lg shadow-primary/20 transition-all text-primary-foreground">
               Get Started
             </Button>
@@ -182,7 +182,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── CTA Footer ─── */}
-      <section className="relative z-10 border-t border-border py-16 text-foreground">
+      <footer className="relative z-10 border-t border-border py-16 text-foreground">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Users className="w-5 h-5 text-primary" />
@@ -209,7 +209,7 @@ export default function LandingPage() {
             No credit card required • Free forever for hackathons
           </p>
         </div>
-      </section>
-    </div>
+      </footer>
+    </main>
   );
 }

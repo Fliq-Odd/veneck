@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { User } from '@supabase/supabase-js';
 
 // ─── Types ───────────────────────────────────────────────
 export interface OrgProfile {
@@ -48,8 +49,8 @@ export interface ActiveUser {
 // ─── Store ───────────────────────────────────────────────
 interface VeNeckState {
   // Auth
-  user: any | null;
-  setUser: (user: any | null) => void;
+  user: User | null;
+  setUser: (user: User | null) => void;
 
   // Profile
   profile: OrgProfile | null;

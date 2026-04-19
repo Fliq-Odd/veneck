@@ -37,20 +37,20 @@ export default function LoginPage() {
     <div className="min-h-[100dvh] bg-background text-foreground flex flex-col items-center justify-center relative overflow-hidden p-4">
       {/* ─── Background ─── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-15%] right-[-5%] w-[500px] h-[500px] bg-emerald-600/15 blur-[160px] rounded-full" />
-        <div className="absolute bottom-[-15%] left-[-5%] w-[400px] h-[400px] bg-teal-700/10 blur-[120px] rounded-full" />
+        <div className="absolute top-[-15%] right-[-5%] w-[500px] h-[500px] bg-primary/15 blur-[160px] rounded-full text-primary-foreground" />
+        <div className="absolute bottom-[-15%] left-[-5%] w-[400px] h-[400px] bg-primary/10 blur-[120px] rounded-full" />
       </div>
 
       <div className="w-full max-w-md z-10 space-y-8">
         {/* ─── Logo ─── */}
         <div className="flex flex-col items-center space-y-3">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="h-12 w-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
-              <Zap className="w-6 h-6 text-emerald-400" />
+            <div className="h-12 w-12 rounded-xl bg-primary/20 border border-primary/40 flex items-center justify-center group-hover:bg-primary/30 transition-colors text-primary-foreground">
+              <Zap className="w-6 h-6 text-primary" />
             </div>
           </Link>
           <h1 className="text-3xl font-black tracking-tight">
-            Welcome <span className="text-emerald-500">Back</span>
+            Welcome <span className="text-primary">Back</span>
           </h1>
           <p className="text-muted-foreground text-sm">
             Sign in to access your command center.
@@ -58,11 +58,11 @@ export default function LoginPage() {
         </div>
 
         {/* ─── Form ─── */}
-        <Card className="backdrop-blur-2xl bg-card/60 border border-border/50 text-foreground shadow-2xl overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-50" />
+        <Card className="backdrop-blur-2xl bg-card/60 border border-border/50 shadow-2xl overflow-hidden relative text-foreground">
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
           <CardHeader className="pt-8 pb-2">
             <CardTitle className="flex items-center gap-2 text-xl">
-              <LogIn className="w-5 h-5 text-emerald-500" />
+              <LogIn className="w-5 h-5 text-primary" />
               Secure Login
             </CardTitle>
             <CardDescription className="text-muted-foreground">
@@ -87,7 +87,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@venuesync.io"
-                  className="bg-background/50 border-border text-foreground dark:text-white placeholder:text-muted-foreground/80 h-12 px-4 focus:border-emerald-500/50 transition-colors"
+                  className="bg-background/50 border-border placeholder:text-muted-foreground/80 h-12 px-4 focus:border-primary/50 transition-colors text-foreground"
                   required
                 />
               </div>
@@ -103,13 +103,13 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="bg-background/50 border-border text-foreground dark:text-white placeholder:text-muted-foreground/80 h-12 px-4 pr-12 focus:border-emerald-500/50 transition-colors"
+                    className="bg-background/50 border-border placeholder:text-muted-foreground/80 h-12 px-4 pr-12 focus:border-primary/50 transition-colors text-foreground"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPw(!showPw)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground0 hover:text-muted-foreground dark:text-slate-300 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground0 hover:text-muted-foreground  transition-colors"
                   >
                     {showPw ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
@@ -119,7 +119,7 @@ export default function LoginPage() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full h-13 bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-white font-bold text-base rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all mt-2"
+                className="w-full h-13 bg-primary hover:bg-primary font-bold text-base rounded-xl shadow-lg shadow-primary/20 hover:shadow-lg shadow-primary/20 transition-all mt-2 text-primary-foreground"
               >
                 {loading ? (
                   <span className="flex items-center gap-2">
@@ -135,7 +135,7 @@ export default function LoginPage() {
             <div className="mt-6 text-center">
               <p className="text-sm text-foreground0">
                 Don&apos;t have an account?{" "}
-                <Link href="/signup" className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">
+                <Link href="/signup" className="text-primary hover:text-primary font-semibold transition-colors">
                   Create one
                 </Link>
               </p>

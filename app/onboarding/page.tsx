@@ -201,18 +201,18 @@ export default function OnboardingPage() {
     <div className="min-h-[100dvh] bg-background text-foreground flex flex-col items-center justify-center relative overflow-hidden p-4">
       {/* ─── Background ─── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-15%] left-[5%] w-[600px] h-[600px] bg-emerald-600/10 blur-[180px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[15%] w-[500px] h-[500px] bg-teal-700/8 blur-[140px] rounded-full" />
+        <div className="absolute top-[-15%] left-[5%] w-[600px] h-[600px] bg-primary/10 blur-[180px] rounded-full text-primary-foreground" />
+        <div className="absolute bottom-[-10%] right-[15%] w-[500px] h-[500px] bg-primary/8 blur-[140px] rounded-full" />
       </div>
 
       <div className="w-full max-w-lg z-10 space-y-8">
         {/* ─── Logo + Header ─── */}
         <div className="flex flex-col items-center space-y-3">
-          <div className="h-14 w-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.2)]">
-            <Zap className="w-7 h-7 text-emerald-400" />
+          <div className="h-14 w-14 rounded-2xl bg-primary/20 border border-primary/40 flex items-center justify-center shadow-lg shadow-primary/20 text-primary-foreground">
+            <Zap className="w-7 h-7 text-primary" />
           </div>
           <h1 className="text-3xl font-black tracking-tight text-center">
-            Setup Your <span className="text-emerald-500">Organization</span>
+            Setup Your <span className="text-primary">Organization</span>
           </h1>
           <p className="text-muted-foreground text-sm text-center max-w-sm">
             Tell us about your organization so we can personalize your command center.
@@ -221,20 +221,20 @@ export default function OnboardingPage() {
 
         {/* ─── Step Indicator ─── */}
         <div className="flex items-center justify-center gap-2">
-          <div className={`h-2 w-16 rounded-full transition-colors duration-300 ${step >= 1 ? "bg-emerald-500" : "bg-slate-800"}`} />
-          <div className={`h-2 w-16 rounded-full transition-colors duration-300 ${step >= 2 ? "bg-emerald-500" : "bg-slate-800"}`} />
+          <div className={`h-2 w-16 rounded-full transition-colors duration-300 ${step >= 1 ? "bg-primary" : "bg-card"}`} />
+          <div className={`h-2 w-16 rounded-full transition-colors duration-300 ${step >= 2 ? "bg-primary" : "bg-card"}`} />
         </div>
 
         {/* ─── Card ─── */}
-        <Card className="backdrop-blur-2xl bg-card/60 border border-border/50 text-foreground shadow-2xl overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-50" />
+        <Card className="backdrop-blur-2xl bg-card/60 border border-border/50 shadow-2xl overflow-hidden relative text-foreground">
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
 
           {/* ─── STEP 1: Organization Info ─── */}
           {step === 1 && (
             <>
               <CardHeader className="pt-8 pb-2">
                 <CardTitle className="flex items-center gap-2 text-xl">
-                  <Building2 className="w-5 h-5 text-emerald-500" />
+                  <Building2 className="w-5 h-5 text-primary" />
                   Organization Details
                 </CardTitle>
                 <CardDescription className="text-muted-foreground">
@@ -261,19 +261,19 @@ export default function OnboardingPage() {
                       value={username}
                       onChange={(e) => checkUsername(e.target.value)}
                       placeholder="your-unique-handle"
-                      className="bg-background/50 border-border text-foreground dark:text-white placeholder:text-muted-foreground/80 h-12 pl-10 pr-10 focus:border-emerald-500/50 transition-colors font-mono"
+                      className="bg-background/50 border-border placeholder:text-muted-foreground/80 h-12 pl-10 pr-10 focus:border-primary/50 transition-colors font-mono text-foreground"
                       maxLength={30}
                       required
                     />
                     <div className="absolute right-3 top-1/2 -translate-y-1/2">
                       {usernameStatus === "checking" && <Loader2 className="w-4 h-4 text-muted-foreground animate-spin" />}
-                      {usernameStatus === "available" && <CheckCircle2 className="w-4 h-4 text-emerald-500" />}
+                      {usernameStatus === "available" && <CheckCircle2 className="w-4 h-4 text-primary" />}
                       {usernameStatus === "taken" && <XCircle className="w-4 h-4 text-rose-500" />}
                     </div>
                   </div>
                   <p className={`text-[11px] font-medium ${
                     usernameStatus === "taken" ? "text-rose-400" :
-                    usernameStatus === "available" ? "text-emerald-400" :
+                    usernameStatus === "available" ? "text-primary" :
                     "text-muted-foreground/80"
                   }`}>
                     {usernameStatus === "idle" && username.length > 0 && username.length < 3 && "Minimum 3 characters"}
@@ -293,7 +293,7 @@ export default function OnboardingPage() {
                     value={orgName}
                     onChange={(e) => setOrgName(e.target.value)}
                     placeholder="e.g., Mumbai Cricket Association"
-                    className="bg-background/50 border-border text-foreground dark:text-white placeholder:text-muted-foreground/80 h-12 px-4 focus:border-emerald-500/50 transition-colors"
+                    className="bg-background/50 border-border placeholder:text-muted-foreground/80 h-12 px-4 focus:border-primary/50 transition-colors text-foreground"
                     required
                   />
                 </div>
@@ -311,14 +311,14 @@ export default function OnboardingPage() {
                         onClick={() => setOrgType(value)}
                         className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-200 text-left text-sm
                           ${orgType === value
-                            ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+                            ? "bg-primary/10 border-primary/40 text-primary shadow-lg shadow-primary/20"
                             : "bg-background/30 border-border text-muted-foreground hover:border-slate-600 hover:text-slate-200"
                           }`}
                       >
                         <Icon className="w-4 h-4 shrink-0" />
                         <span className="font-medium">{label}</span>
                         {orgType === value && (
-                          <CheckCircle2 className="w-4 h-4 ml-auto text-emerald-500 shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 ml-auto text-primary shrink-0" />
                         )}
                       </button>
                     ))}
@@ -330,7 +330,7 @@ export default function OnboardingPage() {
                       value={customOrgType}
                       onChange={(e) => setCustomOrgType(e.target.value)}
                       placeholder="Enter your organization type..."
-                      className="bg-background/50 border-border text-foreground dark:text-white placeholder:text-muted-foreground/80 h-11 px-4 focus:border-emerald-500/50 transition-colors mt-2"
+                      className="bg-background/50 border-border placeholder:text-muted-foreground/80 h-11 px-4 focus:border-primary/50 transition-colors mt-2 text-foreground"
                       autoFocus
                     />
                   )}
@@ -346,14 +346,14 @@ export default function OnboardingPage() {
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Tell us briefly what your organization does..."
                     rows={3}
-                    className="w-full bg-background/50 border border-border text-foreground dark:text-white placeholder:text-muted-foreground/80 rounded-lg px-4 py-3 focus:border-emerald-500/50 transition-colors resize-none text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500/30"
+                    className="w-full bg-background/50 border border-border placeholder:text-muted-foreground/80 rounded-lg px-4 py-3 focus:border-primary/50 transition-colors resize-none text-sm focus:outline-none focus:ring-1 focus:ring-primary/30 text-foreground"
                   />
                 </div>
 
                 <Button
                   onClick={() => setStep(2)}
                   disabled={!canProceedStep1}
-                  className="w-full h-13 bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-white font-bold text-base rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all flex items-center justify-center gap-2 group disabled:opacity-40"
+                  className="w-full h-13 bg-primary hover:bg-primary font-bold text-base rounded-xl shadow-lg shadow-primary/20 hover:shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-40 text-primary-foreground"
                 >
                   Continue
                   <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -367,7 +367,7 @@ export default function OnboardingPage() {
             <>
               <CardHeader className="pt-8 pb-2">
                 <CardTitle className="flex items-center gap-2 text-xl">
-                  <Ticket className="w-5 h-5 text-emerald-500" />
+                  <Ticket className="w-5 h-5 text-primary" />
                   Use Case &amp; Branding
                 </CardTitle>
                 <CardDescription className="text-muted-foreground">
@@ -394,13 +394,13 @@ export default function OnboardingPage() {
                         onClick={() => setUseCase(value)}
                         className={`flex items-center justify-between w-full p-3 rounded-xl border transition-all duration-200 text-left text-sm
                           ${useCase === value
-                            ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+                            ? "bg-primary/10 border-primary/40 text-primary shadow-lg shadow-primary/20"
                             : "bg-background/30 border-border text-muted-foreground hover:border-slate-600 hover:text-slate-200"
                           }`}
                       >
                         <span className="font-medium">{label}</span>
                         {useCase === value && (
-                          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
                         )}
                       </button>
                     ))}
@@ -414,7 +414,7 @@ export default function OnboardingPage() {
                   </Label>
                   <div
                     onClick={() => fileInputRef.current?.click()}
-                    className="relative flex flex-col items-center justify-center p-6 border-2 border-dashed border-slate-700 rounded-xl cursor-pointer hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all duration-300 group"
+                    className="relative flex flex-col items-center justify-center p-6 border-2 border-dashed border-border rounded-xl cursor-pointer hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 group text-primary-foreground"
                   >
                     <input
                       ref={fileInputRef}
@@ -429,25 +429,25 @@ export default function OnboardingPage() {
                         <img
                           src={logoPreview}
                           alt="Logo preview"
-                          className="w-24 h-24 rounded-xl object-cover border-2 border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.15)]"
+                          className="w-24 h-24 rounded-xl object-cover border-2 border-primary/30 shadow-lg shadow-primary/20"
                         />
                         {uploading && (
                           <div className="absolute inset-0 bg-black/60 flex items-center justify-center rounded-xl">
-                            <div className="w-6 h-6 border-2 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin" />
+                            <div className="w-6 h-6 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
                           </div>
                         )}
                         {!uploading && logoUrl && (
-                          <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center">
-                            <CheckCircle2 className="w-4 h-4 text-foreground dark:text-white" />
+                          <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
+                            <CheckCircle2 className="w-4 h-4 text-foreground" />
                           </div>
                         )}
                       </div>
                     ) : (
                       <>
-                        <div className="w-16 h-16 rounded-xl bg-slate-800 flex items-center justify-center mb-3 group-hover:bg-emerald-500/10 transition-colors">
-                          <ImagePlus className="w-8 h-8 text-foreground0 group-hover:text-emerald-400 transition-colors" />
+                        <div className="w-16 h-16 rounded-xl bg-card flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-colors text-primary-foreground">
+                          <ImagePlus className="w-8 h-8 text-foreground0 group-hover:text-primary transition-colors" />
                         </div>
-                        <p className="text-sm text-foreground0 group-hover:text-muted-foreground dark:text-slate-300 transition-colors">
+                        <p className="text-sm text-foreground0 group-hover:text-muted-foreground  transition-colors">
                           Click to upload your logo
                         </p>
                         <p className="text-[10px] text-muted-foreground/80 mt-1">
@@ -463,14 +463,14 @@ export default function OnboardingPage() {
                   <Button
                     variant="outline"
                     onClick={() => setStep(1)}
-                    className="flex-1 border-slate-700 text-muted-foreground dark:text-slate-300 hover:bg-white/5 h-13"
+                    className="flex-1 border-border text-muted-foreground hover:bg-white/5 h-13 text-foreground"
                   >
                     Back
                   </Button>
                   <Button
                     onClick={handleSave}
                     disabled={!canFinish || saving}
-                    className="flex-1 h-13 bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-white font-bold text-base rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all disabled:opacity-40"
+                    className="flex-1 h-13 bg-primary hover:bg-primary font-bold text-base rounded-xl shadow-lg shadow-primary/20 hover:shadow-lg shadow-primary/20 transition-all disabled:opacity-40 text-primary-foreground"
                   >
                     {saving ? (
                       <span className="flex items-center gap-2">

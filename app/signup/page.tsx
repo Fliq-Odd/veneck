@@ -41,20 +41,20 @@ export default function SignupPage() {
     <div className="min-h-[100dvh] bg-background text-foreground flex flex-col items-center justify-center relative overflow-hidden p-4">
       {/* ─── Background ─── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-emerald-600/15 blur-[160px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-teal-700/10 blur-[120px] rounded-full" />
+        <div className="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-primary/15 blur-[160px] rounded-full text-primary-foreground" />
+        <div className="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-primary/10 blur-[120px] rounded-full" />
       </div>
 
       <div className="w-full max-w-md z-10 space-y-8">
         {/* ─── Logo ─── */}
         <div className="flex flex-col items-center space-y-3">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="h-12 w-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
-              <Zap className="w-6 h-6 text-emerald-400" />
+            <div className="h-12 w-12 rounded-xl bg-primary/20 border border-primary/40 flex items-center justify-center group-hover:bg-primary/30 transition-colors text-primary-foreground">
+              <Zap className="w-6 h-6 text-primary" />
             </div>
           </Link>
           <h1 className="text-3xl font-black tracking-tight">
-            Create <span className="text-emerald-500">Account</span>
+            Create <span className="text-primary">Account</span>
           </h1>
           <p className="text-muted-foreground text-sm">
             Set up your command center in seconds.
@@ -62,11 +62,11 @@ export default function SignupPage() {
         </div>
 
         {/* ─── Form ─── */}
-        <Card className="backdrop-blur-2xl bg-card/60 border border-border/50 text-foreground shadow-2xl overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-50" />
+        <Card className="backdrop-blur-2xl bg-card/60 border border-border/50 shadow-2xl overflow-hidden relative text-foreground">
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
           <CardHeader className="pt-8 pb-2">
             <CardTitle className="flex items-center gap-2 text-xl">
-              <UserPlus className="w-5 h-5 text-emerald-500" />
+              <UserPlus className="w-5 h-5 text-primary" />
               Register
             </CardTitle>
             <CardDescription className="text-muted-foreground">
@@ -76,12 +76,12 @@ export default function SignupPage() {
           <CardContent>
             {success ? (
               <div className="py-8 text-center space-y-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center mx-auto">
-                  <Zap className="w-8 h-8 text-emerald-400" />
+                <div className="w-16 h-16 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center mx-auto text-primary-foreground">
+                  <Zap className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-emerald-400">Account Created!</h3>
+                <h3 className="text-xl font-bold text-primary">Account Created!</h3>
                 <p className="text-sm text-muted-foreground">Redirecting to your dashboard...</p>
-                <div className="w-8 h-8 border-2 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin mx-auto" />
+                <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto" />
               </div>
             ) : (
               <form onSubmit={handleSignup} className="space-y-5">
@@ -101,7 +101,7 @@ export default function SignupPage() {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="John Doe"
-                    className="bg-background/50 border-border text-foreground dark:text-white placeholder:text-muted-foreground/80 h-12 px-4 focus:border-emerald-500/50 transition-colors"
+                    className="bg-background/50 border-border placeholder:text-muted-foreground/80 h-12 px-4 focus:border-primary/50 transition-colors text-foreground"
                     required
                   />
                 </div>
@@ -116,7 +116,7 @@ export default function SignupPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin@venuesync.io"
-                    className="bg-background/50 border-border text-foreground dark:text-white placeholder:text-muted-foreground/80 h-12 px-4 focus:border-emerald-500/50 transition-colors"
+                    className="bg-background/50 border-border placeholder:text-muted-foreground/80 h-12 px-4 focus:border-primary/50 transition-colors text-foreground"
                     required
                   />
                 </div>
@@ -132,14 +132,14 @@ export default function SignupPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Min. 6 characters"
-                      className="bg-background/50 border-border text-foreground dark:text-white placeholder:text-muted-foreground/80 h-12 px-4 pr-12 focus:border-emerald-500/50 transition-colors"
+                      className="bg-background/50 border-border placeholder:text-muted-foreground/80 h-12 px-4 pr-12 focus:border-primary/50 transition-colors text-foreground"
                       required
                       minLength={6}
                     />
                     <button
                       type="button"
                       onClick={() => setShowPw(!showPw)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground0 hover:text-muted-foreground dark:text-slate-300 transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground0 hover:text-muted-foreground  transition-colors"
                     >
                       {showPw ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </button>
@@ -149,7 +149,7 @@ export default function SignupPage() {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-13 bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-white font-bold text-base rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all mt-2"
+                  className="w-full h-13 bg-primary hover:bg-primary font-bold text-base rounded-xl shadow-lg shadow-primary/20 hover:shadow-lg shadow-primary/20 transition-all mt-2 text-primary-foreground"
                 >
                   {loading ? (
                     <span className="flex items-center gap-2">
@@ -167,7 +167,7 @@ export default function SignupPage() {
               <div className="mt-6 text-center">
                 <p className="text-sm text-foreground0">
                   Already have an account?{" "}
-                  <Link href="/login" className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">
+                  <Link href="/login" className="text-primary hover:text-primary font-semibold transition-colors">
                     Sign in
                   </Link>
                 </p>
